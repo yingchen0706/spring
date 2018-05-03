@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/aop
+      http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<bean id="logger2" class="learnspring2.Logger2" />
+	<bean id="service" class="learnspring2.FileService" />
+	<bean id="auth" class="learnspring2.FileAuth" />
+	
+	<aop:config>
+		<aop:aspect ref='logger2'>
+			<aop:pointcut id="process" expression="execution(* learnspring2.Service.process(int)) and args(param)"/>
+			<aop:pointcut id="processWithNoParam" expression="execution(** learnspring2.Service.process(..)) "/>
+			<aop:after pointcut-ref="process" method="afterRunning"/>
+			<aop:after-returning pointcut-ref="process" method="afterReturnning"/>
+			<aop:after-throwing pointcut-ref="process" method="afterThrowing"/>
+			<aop:around pointcut-ref="process" method="aroundProcess"/>
+			<aop:before pointcut-ref="processWithNoParam" method="beforeRunning"/>
+		</aop:aspect>
+		<aop:aspect>
+			<aop:declare-parents types-matching="learnspring2.Service+" implement-interface="learnspring2.Auth"
+				delegate-ref="auth" />
+		</aop:aspect>
+	</aop:config>
+
+</beans>

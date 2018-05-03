@@ -7,9 +7,12 @@ import learnspring.Auto;
 
 public class AutoTest {
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ApplicationContext context = new AnnotationConfigApplicationContext(config.CarConfig.class);
+		ApplicationContext context = new AnnotationConfigApplicationContext(config.CarIntConfig.class);
 		
 		Auto car = context.getBean(learnspring.Auto.class);
 		car.run();

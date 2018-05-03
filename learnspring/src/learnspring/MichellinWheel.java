@@ -3,6 +3,7 @@ package learnspring;
 import org.springframework.stereotype.Component;
 
 @Component
+@brand
 public class MichellinWheel implements Wheel {
 
 	@Override

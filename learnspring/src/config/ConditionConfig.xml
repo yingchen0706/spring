@@ -4,15 +4,10 @@
   xsi:schemaLocation="http://www.springframework.org/schema/beans 
       http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="engine" class="learnspring.VEightEngine">
-	</bean>
-
-	<bean id="auto" class="learnspring.Car">
-		<constructor-arg ref="engine"/>
+	<bean id="wheel" class="learnspring.ConditionalWheel" />
+	
+	<bean id="auto" class="learnspring.TestC">
 		<property name="wheel" ref="wheel"/>
-		<property name="brand" value="Benz"></property>
 	</bean>
 
-	<bean id="wheel" class="learnspring.MichellinWheel">
-	</bean>
 </beans>
